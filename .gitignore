@@ -6,7 +6,8 @@
 
 # Все папки
 **.venv/
-
+**_configs/
+**_settings/
 
 
 
