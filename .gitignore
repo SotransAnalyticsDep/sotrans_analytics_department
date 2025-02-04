@@ -6,6 +6,7 @@
 
 # Все папки
 **.venv/
+**__pycache__/
 **_configs/
 **_settings/
 
