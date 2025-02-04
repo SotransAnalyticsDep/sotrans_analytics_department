@@ -1,0 +1,19 @@
+[project]
+name = "article-crossing"
+version = "1.0.0"
+description = "Инструмент перемешивания кросс-номеров"
+authors = [
+    {name = "Dmitry 'ts.kdv.raz0r' Kolganov",email = "ts.kdv.raz0r@ya.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pandas (>=2.2.3,<3.0.0)",
+    "ipykernel (>=6.29.5,<7.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
