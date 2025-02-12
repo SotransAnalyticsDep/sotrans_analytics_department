@@ -75,8 +75,6 @@ trainer.train_model(model, X_train, y_train)
 Создание отчёта:
 
 ```python
-Копировать
-Редактировать
 from source.visualization.reporting.report_generator import ReportGenerator
 
 report_generator = ReportGenerator()
