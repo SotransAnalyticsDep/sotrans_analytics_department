@@ -21,7 +21,7 @@
 Ниже приведена иерархическая структура проекта:
 
 ```plaintext
-my_data_package/
+sotrans_analytics_department/
 ├── setup.py
 ├── README.md
 ├── LICENSE
