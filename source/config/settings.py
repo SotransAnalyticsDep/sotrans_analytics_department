@@ -16,12 +16,18 @@
 
 import os
 import json
-from loguru import logger
 
 try:
     import yaml
 except ImportError:
     yaml = None
+
+from source.common.logger import Logger
+
+# Инициализация логгера с указанием файла лога и уровня логирования
+logger = Logger(log_file="app.log", level="DEBUG")
+logger.info("Это информационное сообщение")
+
 
 
 class Settings:
