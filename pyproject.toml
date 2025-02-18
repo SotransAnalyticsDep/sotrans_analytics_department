@@ -1,0 +1,21 @@
+[project]
+name = "sotrans-analytics-department"
+version = "0.0.0"
+description = ""
+authors = [
+    {name = "Dmitry 'ts.kdv.raz0r' Kolganov",email = "ts.kdv.raz0r@ya.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.13,<4"
+dependencies = [
+    "pandas (>=2.2.3,<3.0.0)",
+    "ipykernel (>=6.29.5,<7.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "loguru (>=0.7.3,<0.8.0)",
+    "clickhouse-connect (>=0.8.15,<0.9.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
