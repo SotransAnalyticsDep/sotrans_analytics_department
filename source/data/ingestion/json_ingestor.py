@@ -85,10 +85,6 @@ class JSONIngestor(BaseIngestor):
             error_message = f"Файл по ссылке {kwargs} не найден"
             logger.error(error_message)
             raise FileNotFoundError(error_message) from e
-        except pd.errors.ParserError as e:
-            error_message = f"Oшибка при загрузке данных неверный{kwargs},{kwargs}"
-            logger.error(error_message)
-            raise pd.errors.ParserError(error_message) from e
         except Exception as e:
             error_message = f"Неизвестная ошибка{e}"
             logger.error(error_message)
