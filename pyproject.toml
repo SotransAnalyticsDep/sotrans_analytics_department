@@ -6,8 +6,11 @@ authors = [
     {name = "Dmitry 'ts.kdv.raz0r' Kolganov",email = "ts.kdv.raz0r@ya.ru"}
 ]
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<4.0"
 dependencies = [
+    "pywin32 (>=310,<311)",
+    "pandas (>=2.2.3,<3.0.0)",
+    "loguru (>=0.7.3,<0.8.0)"
 ]
 
 
