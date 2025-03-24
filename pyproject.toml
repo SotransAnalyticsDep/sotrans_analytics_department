@@ -10,7 +10,9 @@ requires-python = ">=3.12,<4.0"
 dependencies = [
     "pywin32 (>=310,<311)",
     "pandas (>=2.2.3,<3.0.0)",
-    "loguru (>=0.7.3,<0.8.0)"
+    "loguru (>=0.7.3,<0.8.0)",
+    "sqlalchemy (>=2.0.39,<3.0.0)",
+    "psycopg2 (>=2.9.10,<3.0.0)"
 ]
 
 
