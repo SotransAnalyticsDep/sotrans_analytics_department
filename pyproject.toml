@@ -1,0 +1,16 @@
+[project]
+name = "sotrans-analytics-department"
+version = "0.0.0"
+description = "Проекты аналитического отдела ГК \"Сотранс\""
+authors = [
+    {name = "Dmitry 'ts.kdv.raz0r' Kolganov",email = "ts.kdv.raz0r@ya.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
