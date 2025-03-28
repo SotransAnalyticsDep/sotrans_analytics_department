@@ -21,8 +21,11 @@ from .modules.config.config import (
     DEFAULT_ENGINE,
     DEFAULT_PERIOD,
 )
-from .modules.interface import (  # IIncome,; IHaving,; IExpend,; IEnd,; ITransfer,; IArrival,; IOrder,; ISale,; ILoss,
+from .modules.interface import ( # IHaving,; ITransfer,; IArrival,; IOrder,; ISale,; ILoss,
     IStart,
+    IIncome,
+    IExpend,
+    IEnd,
 )
 
 
@@ -158,13 +161,13 @@ class Datamart:
         """
         return self.__get_interface(key="IStart", cls=IStart)
 
-    # @property
-    # def IIncome(self) -> object:
-    #     """
-    #     Создаёт и возвращает интерфейс для взаимодействия с данными
-    #     "Приход".
-    #     """
-    #     return self.__get_interface(key="IIncome", cls=IIncome)
+    @property
+    def IIncome(self) -> object:
+        """
+        Создаёт и возвращает интерфейс для взаимодействия с данными
+        "Приход".
+        """
+        return self.__get_interface(key="IIncome", cls=IIncome)
 
     # @property
     # def IHaving(self) -> object:
@@ -174,21 +177,21 @@ class Datamart:
     #     """
     #     return self.__get_interface(key="IHaving", cls=IHaving)
 
-    # @property
-    # def IExpend(self) -> object:
-    #     """
-    #     Создаёт и возвращает интерфейс для взаимодействия с данными
-    #     "Расход".
-    #     """
-    #     return self.__get_interface(key="IExpend", cls=IExpend)
+    @property
+    def IExpend(self) -> object:
+        """
+        Создаёт и возвращает интерфейс для взаимодействия с данными
+        "Расход".
+        """
+        return self.__get_interface(key="IExpend", cls=IExpend)
 
-    # @property
-    # def IEnd(self) -> object:
-    #     """
-    #     Создаёт и возвращает интерфейс для взаимодействия с данными
-    #     "Конечный остаток".
-    #     """
-    #     return self.__get_interface(key="IEnd", cls=IEnd)
+    @property
+    def IEnd(self) -> object:
+        """
+        Создаёт и возвращает интерфейс для взаимодействия с данными
+        "Конечный остаток".
+        """
+        return self.__get_interface(key="IEnd", cls=IEnd)
 
     # @property
     # def ITransfer(self) -> object:
