@@ -43,7 +43,7 @@ METHODS_MAP = {
         "write_off": SQLExpend.get_sql_query_write_off,
     },
     "en": {
-        "final": None,
+        "final": SQLEnd.get_sql_query_final,
     },
     "tr": {
         "transfer": None,
