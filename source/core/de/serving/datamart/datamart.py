@@ -21,11 +21,12 @@ from .modules.config.config import (
     DEFAULT_ENGINE,
     DEFAULT_PERIOD,
 )
-from .modules.interface import ( # IHaving,; ITransfer,; IArrival,; IOrder,; ISale,; ILoss,
+from .modules.interface import ( # IHaving,; ITransfer, IOrder,; ISale,; ILoss,
     IStart,
     IIncome,
     IExpend,
     IEnd,
+    IArrival,
 )
 
 
@@ -201,13 +202,13 @@ class Datamart:
     #     """
     #     return self.__get_interface(key="ITransfer", cls=ITransfer)
 
-    # @property
-    # def IArrival(self) -> object:
-    #     """
-    #     Создаёт и возвращает интерфейс для взаимодействия с данными
-    #     "Приёмка товара".
-    #     """
-    #     return self.__get_interface(key="IArrival", cls=IArrival)
+    @property
+    def IArrival(self) -> object:
+        """
+        Создаёт и возвращает интерфейс для взаимодействия с данными
+        "Приёмка товара".
+        """
+        return self.__get_interface(key="IArrival", cls=IArrival)
 
     # @property
     # def IOrder(self) -> object:
