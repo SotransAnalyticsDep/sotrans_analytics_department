@@ -103,7 +103,7 @@ class IEnd(IBasic):
         dataframe: pd.DataFrame = execute_sql_query(
             engine=self.__datamart.engine,
             query=sql_query,
-            params=(str(start_date),) if agg_func in ("first", "last") else (str(start_date), str(end_date)),
+            params=(str(start_date),) if agg_func == "first" else (str(end_date),) if agg_func == "last" else (str(start_date), str(end_date)),
         )
 
          # Добавление данных из DataFrame к витрине данных
