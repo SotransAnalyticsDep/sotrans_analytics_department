@@ -10,6 +10,7 @@ from ..sql import (
     SQLIncome,
     SQLExpend,
     SQLEnd,
+    SQLTransfer,
     SQLArrival,
 )
 
@@ -47,7 +48,7 @@ METHODS_MAP = {
         "final": SQLEnd.get_sql_query_final,
     },
     "tr": {
-        "transfer": None,
+        "transfer": SQLTransfer.get_sql_query_transfer,
     },
     "ar": {
         "arrival": SQLArrival.get_sql_query_arrival,
