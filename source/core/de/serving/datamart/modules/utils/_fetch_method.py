@@ -10,6 +10,7 @@ from ..sql import (
     SQLIncome,
     SQLExpend,
     SQLEnd,
+    SQLArrival,
 )
 
 # ##################################################
@@ -47,6 +48,9 @@ METHODS_MAP = {
     },
     "tr": {
         "transfer": None,
+    },
+    "ar": {
+        "arrival": SQLArrival.get_sql_query_arrival,
     },
     "sl": {
         "sale": None,
