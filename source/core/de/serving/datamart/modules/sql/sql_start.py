@@ -63,4 +63,3 @@ class SQLStart:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
-            
