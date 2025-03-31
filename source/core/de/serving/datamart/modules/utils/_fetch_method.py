@@ -12,6 +12,7 @@ from ..sql import (
     SQLEnd,
     SQLTransfer,
     SQLArrival,
+    SQLHaving,
 )
 
 # ##################################################
@@ -30,8 +31,8 @@ METHODS_MAP = {
         "update": SQLIncome.get_sql_query_update,
     },
     "hv": {
-        "stock": None,
-        "sale": None,
+        "stock": SQLHaving.get_sql_query_stock,
+        "sale": SQLHaving.get_sql_query_stock,
         "lost_demand": None,
     },
     "ex": {
