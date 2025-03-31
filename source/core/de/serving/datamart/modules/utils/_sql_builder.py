@@ -128,3 +128,53 @@ def build_sql_query_with_pre_agg_data(
     """
 
     return query
+
+
+def build_sql_query_with_distinct(
+        prefix: str,
+        doc_type: str,
+        period: int,
+        agg_cat_cols: Tuple[str, ...],
+        agg_dgt_cols: Tuple[str, ...],
+        agg_dt_cols: Tuple[str, ...],
+) -> str:
+    """
+    Метод формирует SQL-запрос на основании входных данных для получения данных
+    на начальную дату анализируемого периода.
+
+    Args:
+        prefix(str): Префикс типа документа.
+            Доступны: st, in, hv, ex, en, tr, sl, ld.
+        doc_type(str): Тип документа (хоз. операция).
+            Например: init, entering, inventory, update.
+        agg_cat_cols(Tuple[str]): Кортеж с категориальными столбцами.
+        agg_dgt_cols(Tuple[str]): Кортеж с временными столбцами.
+
+    Returns:
+        str: Сформированный SQL-запрос.
+    """
+
+    # Формирование блока SELECT
+    logger.trace("Формирование блока SELECT")
+    slct_cat_cols: List[str] = [f"{col} AS {col}" for col in agg_cat_cols]
+
+    # Формирование блока агрегации
+    logger.trace("Формирование блока агрегации")
+    slct_dgt_cols: List[str] = [
+        f"count(distinct({agg_dt_cols[-1]})) AS {prefix}_{doc_type}_{period}_{agg_dt_cols[-1]}"
+    ]
+
+    # Формирование блока GROUP BY
+    logger.trace("Формирование блока GROUP BY")
+    gb_cat_cols: str = ", ".join([col for col in agg_cat_cols])
+
+    # Сборка итогового SQL-запроса
+    logger.trace("Сборка итогового SQL-запроса")
+    query: str = f"""
+    SELECT {", ".join(slct_cat_cols + slct_dgt_cols)}
+    FROM report.vw_{prefix}_{doc_type}
+    WHERE date between %s and %s
+    GROUP BY {gb_cat_cols}
+    """
+
+    return query
