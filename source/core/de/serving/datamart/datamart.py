@@ -21,13 +21,14 @@ from .modules.config.config import (
     DEFAULT_ENGINE,
     DEFAULT_PERIOD,
 )
-from .modules.interface import ( # IHaving,; IOrder,; ISale,; ILoss,
+from .modules.interface import ( # IOrder,; ISale,; ILoss,
     IStart,
     IIncome,
     IExpend,
     IEnd,
     ITransfer,
     IArrival,
+    IHaving
 )
 
 
@@ -156,7 +157,7 @@ class Datamart:
     # СВОЙСТВА ЛЕНИВЫХ ИНТЕРФЕЙСОВ
     # ##################################################
     @property
-    def IStart(self) -> object:
+    def IStart(self) -> IStart:
         """
         Создаёт и возвращает интерфейс для взаимодействия с данными
         "Начальный остаток".
@@ -164,23 +165,23 @@ class Datamart:
         return self.__get_interface(key="IStart", cls=IStart)
 
     @property
-    def IIncome(self) -> object:
+    def IIncome(self) -> IIncome:
         """
         Создаёт и возвращает интерфейс для взаимодействия с данными
         "Приход".
         """
         return self.__get_interface(key="IIncome", cls=IIncome)
 
-    # @property
-    # def IHaving(self) -> object:
-    #     """
-    #     Создаёт и возвращает интерфейс для взаимодействия с данными
-    #     "Наличие".
-    #     """
-    #     return self.__get_interface(key="IHaving", cls=IHaving)
+    @property
+    def IHaving(self) -> IHaving:
+        """
+        Создаёт и возвращает интерфейс для взаимодействия с данными
+        "Наличие".
+        """
+        return self.__get_interface(key="IHaving", cls=IHaving)
 
     @property
-    def IExpend(self) -> object:
+    def IExpend(self) -> IExpend:
         """
         Создаёт и возвращает интерфейс для взаимодействия с данными
         "Расход".
@@ -188,7 +189,7 @@ class Datamart:
         return self.__get_interface(key="IExpend", cls=IExpend)
 
     @property
-    def IEnd(self) -> object:
+    def IEnd(self) -> IEnd:
         """
         Создаёт и возвращает интерфейс для взаимодействия с данными
         "Конечный остаток".
@@ -196,7 +197,7 @@ class Datamart:
         return self.__get_interface(key="IEnd", cls=IEnd)
 
     @property
-    def ITransfer(self) -> object:
+    def ITransfer(self) -> ITransfer:
         """
         Создаёт и возвращает интерфейс для взаимодействия с данными
         "Товары в пути".
@@ -204,7 +205,7 @@ class Datamart:
         return self.__get_interface(key="ITransfer", cls=ITransfer)
 
     @property
-    def IArrival(self) -> object:
+    def IArrival(self) -> IArrival:
         """
         Создаёт и возвращает интерфейс для взаимодействия с данными
         "Приёмка товара".
