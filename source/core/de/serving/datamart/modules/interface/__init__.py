@@ -5,3 +5,4 @@ from .i_expend import IExpend
 from .i_end import IEnd
 from .i_transfer import ITransfer
 from .i_arrival import IArrival
+from .i_having import IHaving
