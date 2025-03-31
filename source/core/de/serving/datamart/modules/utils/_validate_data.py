@@ -43,6 +43,9 @@ def __gen_col_name(
         str: Строка с новым наименованием столбца.
     """
 
+    if prefix == "hv":
+        return f"{prefix}_{doc_type}_{period}_{dt_col}"
+
     if agg_func == "first":
         return f"{prefix}_{doc_type}_{dgt_col}_fd"
     elif agg_func == "last":
