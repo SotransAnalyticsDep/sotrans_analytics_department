@@ -8,7 +8,7 @@
 import sys
 import win32com.client
 from functools import wraps
-from typing import Collable, Any
+from typing import Callable, Any
 from zipfile import BadZipFile
 
 import pandas as pd
@@ -21,7 +21,7 @@ from source.utils.excel.vba import VBA_UNMERGE_ALL_CELLS
 # ##################################################
 # ФУНКЦИИ-ДЕКОРАТОРЫ
 # ##################################################
-def error_xl_shared_strings_xml(func: Collable[..., pd.DataFrame]) -> Collable[..., pd.DataFrame]:
+def error_xl_shared_strings_xml(func: Callable[..., pd.DataFrame]) -> Callable[..., pd.DataFrame]:
     """
     Декоратор обработки ошибки при формировании DataFrame из XLSX-файлов.
     При возникновении ошибки "error_xl_shared_strings_xml", связанной с некорректной выгрузкой данных из 1С, в рабочую книгу Excel передаётся модуль с VBA-кодом, который рахъединяет все объединённые ячейки на всех листах, сохраняет файл и выполняет повторную попытку формирования DataFrame.
@@ -54,7 +54,7 @@ def error_xl_shared_strings_xml(func: Collable[..., pd.DataFrame]) -> Collable[.
             if not isinstance(filepath, str) and not filepath:
                 err_msg: str = f'Путь к файлу "filepath" не был корректно передан: {filepath}'
                 logger.error(err_msg)
-                raise ValueError(err_msg)
+                raise ValueError(err_msg) from err
 
             try:
                 # Загрузка рабочей книги Excel
@@ -81,7 +81,7 @@ def error_xl_shared_strings_xml(func: Collable[..., pd.DataFrame]) -> Collable[.
                 return func(*args, **kwargs)
                 
             except Exception as vba_err:
-                vba_err_msg: str = f'Ошибка при выполнении VBA-макроса: {str(vba_err_msg)}'
-                raise RuntimeError(vba_err_msg)
+                vba_err_msg: str = f'Ошибка при выполнении VBA-макроса: {str(vba_err)}'
+                raise RuntimeError(vba_err_msg) from vba_err
         
-        return wrapper
+    return wrapper
