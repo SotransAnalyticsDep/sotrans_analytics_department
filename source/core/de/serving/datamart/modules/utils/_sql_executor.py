@@ -6,6 +6,7 @@
 # ИМПОРТЫ
 # ##################################################
 from typing import Optional, Tuple
+from functools import lru_cache
 
 import pandas as pd
 from loguru import logger
@@ -15,6 +16,7 @@ from sqlalchemy import Engine
 # ##################################################
 # ФУНКЦИИ
 # ##################################################
+@lru_cache(maxsize=32)
 def execute_sql_query(
     engine: Engine,
     query: str,
