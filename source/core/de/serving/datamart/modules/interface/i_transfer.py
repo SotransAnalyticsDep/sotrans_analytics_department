@@ -40,7 +40,7 @@ class ITransfer(IBasic):
         end_date: Optional[dt.date] = None,
         agg_dgt_cols: Optional[Tuple[str, ...]] = None,
         agg_dt_cols: Optional[Tuple[str, ...]] = None,
-        agg_func: Optional[str] = None,
+        agg_func: Optional[str] = 'last',
         how_to_merge: str = 'outer'
     ) -> None:
 
