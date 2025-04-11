@@ -135,7 +135,6 @@ def build_sql_query_with_distinct(
         doc_type: str,
         period: int,
         agg_cat_cols: Tuple[str, ...],
-        agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
 ) -> str:
     """
@@ -175,6 +174,57 @@ def build_sql_query_with_distinct(
     FROM report.vw_{prefix}_{doc_type}
     WHERE date between %s and %s
     GROUP BY {gb_cat_cols}
+    """
+
+    return query
+
+def build_sql_query_order(
+        prefix: str,
+        doc_type: str,
+        agg_cat_cols: Tuple[str, ...],
+) -> str:
+    
+    # Формирование блока SELECT для CTE
+    cte_slct_cat_cols: List[str] = [
+        col for col in agg_cat_cols
+        if col in ('brand_name_1c', 'sku_id_1c', 'sku_cat_num', 'sku_art_num')
+    ]
+    cte_slct_dgt_cols: List[str] = [
+        f"round(sum({col})::decimal, 2) AS {prefix}_{doc_type}_{col}"
+        for col in ('ordered_cnt', 'backorder_cnt', 'shipped_cnt')
+    ]
+
+    # Формирование блока GROUP BY для CTE
+    cte_gb: str = ", ".join([
+        col for col in agg_cat_cols
+        if col in ('brand_name_1c', 'sku_id_1c', 'sku_cat_num', 'sku_art_num')
+    ])
+
+    # Формирование блока SELECT основного запроса
+    slct_cat_cols: List[str] = [f"{col} AS {col}" for col in agg_cat_cols]
+    slct_dgt_cols: List[str] = [
+        (
+            f"round(sum({prefix}_{doc_type}_{col})::decimal, 2) AS "
+            f"{prefix}_{doc_type}_{col}"
+        )
+        for col in [
+            col for col in ('ordered_cnt', 'backorder_cnt', 'shipped_cnt')
+        ]
+    ]
+
+    # Формирование блока GROUP BY основного запроса
+    gb: str = ", ".join(agg_cat_cols)
+
+    # Сборка полного SQL-запроса с использованием параметризации дат
+    query: str = f"""
+    WITH agg_data AS (
+        SELECT {", ".join(cte_slct_cat_cols + cte_slct_dgt_cols)}
+        FROM report.vw_{prefix}_{doc_type}
+        GROUP BY {cte_gb}
+    )
+    SELECT {", ".join(slct_cat_cols + slct_dgt_cols)}
+    FROM agg_data
+    GROUP BY {gb}
     """
 
     return query
