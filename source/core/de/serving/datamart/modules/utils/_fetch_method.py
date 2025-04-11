@@ -13,6 +13,7 @@ from ..sql import (
     SQLTransfer,
     SQLArrival,
     SQLHaving,
+    SQLOrder
 )
 
 # ##################################################
@@ -50,6 +51,9 @@ METHODS_MAP = {
     },
     "tr": {
         "transfer": SQLTransfer.get_sql_query_transfer,
+    },
+    "cr": {
+        "orders": SQLOrder.get_sql_query_order,
     },
     "ar": {
         "arrival": SQLArrival.get_sql_query_arrival,
