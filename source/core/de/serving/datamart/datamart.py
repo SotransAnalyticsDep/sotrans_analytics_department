@@ -28,7 +28,8 @@ from .modules.interface import ( # IOrder,; ISale,; ILoss,
     IEnd,
     ITransfer,
     IArrival,
-    IHaving
+    IHaving,
+    IOrder
 )
 
 
@@ -212,13 +213,13 @@ class Datamart:
         """
         return self.__get_interface(key="IArrival", cls=IArrival)
 
-    # @property
-    # def IOrder(self) -> object:
-    #     """
-    #     Создаёт и возвращает интерфейс для взаимодействия с данными
-    #     "Текущие размещённые заказы".
-    #     """
-    #     return self.__get_interface(key="IOrder", cls=IOrder)
+    @property
+    def IOrder(self) -> object:
+        """
+        Создаёт и возвращает интерфейс для взаимодействия с данными
+        "Текущие размещённые заказы".
+        """
+        return self.__get_interface(key="IOrder", cls=IOrder)
 
     # @property
     # def ISale(self) -> object:
