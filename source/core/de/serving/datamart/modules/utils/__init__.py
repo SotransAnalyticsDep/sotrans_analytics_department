@@ -1,6 +1,7 @@
 from ._sql_builder import (
     build_sql_query_by_date,
-    build_sql_query_with_pre_agg_data
+    build_sql_query_with_pre_agg_data,
+    build_sql_query_order
 )
 from ._sql_executor import execute_sql_query
 from ._validate_data import is_cols_available
