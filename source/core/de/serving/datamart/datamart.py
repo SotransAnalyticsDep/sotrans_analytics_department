@@ -46,9 +46,9 @@ class Datamart:
         engine: Engine = DEFAULT_ENGINE,
         period: int = DEFAULT_PERIOD,
         end_date: dt.date = DEFAULT_END_DATE,
-        agg_cat_cols: Tuple[str] = DEFAULT_AGG_CAT_COLS,
-        agg_dgt_cols: Tuple[str] = DEFAULT_AGG_DGT_COLS,
-        agg_dt_cols: Tuple[str] = DEFAULT_AGG_DT_COLS,
+        agg_cat_cols: Tuple[str, ...] = DEFAULT_AGG_CAT_COLS,
+        agg_dgt_cols: Tuple[str, ...] = DEFAULT_AGG_DGT_COLS,
+        agg_dt_cols: Tuple[str, ...] = DEFAULT_AGG_DT_COLS,
         agg_func: str = DEFAULT_AGG_FUNC,
     ) -> None:
 
@@ -59,9 +59,9 @@ class Datamart:
         self.__period: int = period
         self.__end_date: dt.date = end_date
         self.__start_date: dt.date = self.calc_start_date(period=period - 1)
-        self.__agg_cat_cols: Tuple[str] = agg_cat_cols
-        self.__agg_dgt_cols: Tuple[str] = agg_dgt_cols
-        self.__agg_dt_cols: Tuple[str] = agg_dt_cols
+        self.__agg_cat_cols: Tuple[str, ...] = agg_cat_cols
+        self.__agg_dgt_cols: Tuple[str, ...] = agg_dgt_cols
+        self.__agg_dt_cols: Tuple[str, ...] = agg_dt_cols
         self.__agg_func: str = agg_func
         self.__df: pd.DataFrame = pd.DataFrame(columns=self.__agg_cat_cols)
         self.__interfaces: Dict[str, None] = {
@@ -109,21 +109,21 @@ class Datamart:
         return self.__end_date
 
     @property
-    def agg_cat_cols(self) -> Tuple[str]:
+    def agg_cat_cols(self) -> Tuple[str, ...]:
         """
         Геттер кортежа с наименованиями категориальных столбцов.
         """
         return self.__agg_cat_cols
 
     @property
-    def agg_dgt_cols(self) -> Tuple[str]:
+    def agg_dgt_cols(self) -> Tuple[str, ...]:
         """
         Геттер кортежа с наименованиями числовых столбцов.
         """
         return self.__agg_dgt_cols
 
     @property
-    def agg_dt_cols(self) -> Tuple[str]:
+    def agg_dt_cols(self) -> Tuple[str, ...]:
         """
         Геттер кортежа с временными столбцами.
         """

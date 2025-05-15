@@ -6,7 +6,7 @@ SQL-запроса с текущей витриной данных.
 # ##################################################
 # ИМПОРТЫ
 # ##################################################
-from typing import Tuple
+from typing import Tuple, Optional
 
 import pandas as pd
 from loguru import logger
@@ -18,6 +18,7 @@ from loguru import logger
 def merge_df_with_dm(
         dm,
         df: pd.DataFrame,
+        agg_cat_cols: Optional[Tuple[str, ...]] = None,
         how_to_merge: Tuple[str] | str = 'outer'
 ) -> None:
     """
@@ -43,10 +44,14 @@ def merge_df_with_dm(
             "Объединение DataFrame, сформированного на основании SQL-запроса, "
             "и витрины данных"
         )
+        
+        if agg_cat_cols is None:
+            agg_cat_cols = dm.agg_cat_cols
+        
         dm.df = dm.df.merge(
             right=df,
             how=how_to_merge,
-            on=dm.agg_cat_cols
+            on=agg_cat_cols,
         )
     
     except ValueError as ve:

@@ -38,6 +38,7 @@ class IHaving(IBasic):
         period: Optional[int] = None,
         start_date: Optional[dt.date] = None,
         end_date: Optional[dt.date] = None,
+        agg_cat_cols: Optional[Tuple[str, ...]] = None,
         agg_dgt_cols: Optional[Tuple[str, ...]] = None,
         agg_dt_cols: Optional[Tuple[str, ...]] = None,
         agg_func: Optional[str] = "count",
@@ -60,7 +61,8 @@ class IHaving(IBasic):
                     period=period - 1,
                     end_date=end_date
                 )
-
+        if agg_cat_cols is None:
+            agg_cat_cols: Tuple[str, ...] = self.__datamart.agg_cat_cols
         if agg_dgt_cols is None:
             agg_dgt_cols: Tuple[str, ...] = self.__datamart.agg_dgt_cols
         if agg_dt_cols is None:
@@ -90,8 +92,7 @@ class IHaving(IBasic):
             prefix="hv",
             doc_type="stock",
             period=period,
-            agg_cat_cols=self.__datamart.agg_cat_cols,
-            agg_dgt_cols=agg_dgt_cols,
+            agg_cat_cols=agg_cat_cols,
             agg_dt_cols=agg_dt_cols,
         )
 
@@ -106,6 +107,7 @@ class IHaving(IBasic):
         merge_df_with_dm(
             dm=self.__datamart,
             df=dataframe,
+            agg_cat_cols=agg_cat_cols,
             how_to_merge=how_to_merge
         )
 
@@ -115,7 +117,6 @@ class IHaving(IBasic):
         period: Optional[int] = None,
         start_date: Optional[dt.date] = None,
         end_date: Optional[dt.date] = None,
-        agg_dgt_cols: Optional[Tuple[str, ...]] = None,
         agg_dt_cols: Optional[Tuple[str, ...]] = None,
         agg_func: Optional[str] = "count",
         how_to_merge: str = "outer"
@@ -138,30 +139,11 @@ class IHaving(IBasic):
                     end_date=end_date
                 )
 
-        if agg_dgt_cols is None:
-            agg_dgt_cols: Tuple[str, ...] = self.__datamart.agg_dgt_cols
         if agg_dt_cols is None:
             agg_dt_cols: Tuple[str, ...] = self.__datamart.agg_dt_cols
-        dt_col: str = agg_dt_cols[-1]
-
-        # Проверка доступности числовых столбцов
-        available_dgt_cols: Optional[Tuple[str, ...]] = is_cols_available(
-            prefix="hv",
-            doc_type="sale",
-            period=period,
-            agg_dgt_cols=agg_dgt_cols,
-            agg_func=agg_func,
-            dt_col=dt_col,
-            exists_cols=tuple(self.__datamart.df.columns)
-        )
-
-        if not available_dgt_cols:
-            logger.warning("Нет доступных колонок для операции")
-            return None
 
         # Получение метода формирования SQL-запроса
         sql_method = METHODS_MAP["hv"]["sale"]
-
 
         # Получение SQL-запроса
         sql_query: str = sql_method(
@@ -169,7 +151,6 @@ class IHaving(IBasic):
             doc_type="sale",
             period=period,
             agg_cat_cols=self.__datamart.agg_cat_cols,
-            agg_dgt_cols=agg_dgt_cols,
             agg_dt_cols=agg_dt_cols,
         )
 

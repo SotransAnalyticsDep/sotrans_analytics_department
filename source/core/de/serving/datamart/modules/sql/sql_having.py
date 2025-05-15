@@ -31,7 +31,7 @@ class SQLHaving:
         doc_type: str,
         period: int,
         agg_cat_cols: Tuple[str, ...],
-        agg_dgt_cols: Tuple[str, ...],
+        #agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
     ) -> Optional[str]:
 
@@ -41,7 +41,6 @@ class SQLHaving:
             doc_type=doc_type,
             period=period,
             agg_cat_cols=agg_cat_cols,
-            agg_dgt_cols=agg_dgt_cols,
             agg_dt_cols=agg_dt_cols,
         )
         logger.success("SQL-запрос успешно сформирован")

@@ -5,7 +5,6 @@
 # ##################################################
 # ИМПОРТЫ
 # ##################################################
-import datetime as dt
 from typing import Optional, Tuple
 
 import pandas as pd
@@ -29,6 +28,7 @@ class IOrder(IBasic):
 
     def process(self) -> None:
         logger.info("Обработка 'Начального Остатка'")
+
 
     # ##################################################
     # API

@@ -1,13 +1,22 @@
 """
-Модуль отвечает за предоставление VBA-кода Excel.
+Модуль отвечает за доступ к VBA-коду.
 """
 
-# VBA-код, отвечающий за разъединение всех объединённых ячеек на всех листах рабочей книги
-VBA_UNMERGE_ALL_CELLS: str = '''
+
+# ##################################################
+# FUNCTIONS
+# ##################################################
+def get_unmerge_all_cells() -> str:
+    """
+    Функция предоставляет VBA-код для отмены объединения ячеек на всех листах 
+    рабочей книги Excel.
+    """
+    
+    return """
 Sub unmerge_all_cells()
-    Dim ws As Worksheets
+    Dim ws As Worksheet
     For Each ws In ThisWorkbook.Worksheets
-        ws.Cells.UnMerge
+        ws.Cells.Unmerge
     Next ws
 End Sub
-'''
+"""

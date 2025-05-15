@@ -2,7 +2,12 @@
 **.idea/
 **.trunk/
 **.venv/
+**.vscode/
 **__pycache__/
+**_configs/
 
 # ФАЙЛЫ
 **config.py
+**.json
+**.xlsx
+**.log
