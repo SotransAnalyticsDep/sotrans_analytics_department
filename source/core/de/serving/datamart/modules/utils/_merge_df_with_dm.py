@@ -19,7 +19,7 @@ def merge_df_with_dm(
         dm,
         df: pd.DataFrame,
         agg_cat_cols: Optional[Tuple[str, ...]] = None,
-        how_to_merge: Tuple[str] | str = 'outer'
+        how_to_merge: str = 'outer'
 ) -> None:
     """
     Объединяет DataFrame, сформированный на основании SQL-запроса с DataFrame
@@ -46,7 +46,7 @@ def merge_df_with_dm(
         )
         
         if agg_cat_cols is None:
-            agg_cat_cols = dm.agg_cat_cols
+            agg_cat_cols: Tuple[str, ...] = dm.agg_cat_cols
         
         dm.df = dm.df.merge(
             right=df,
