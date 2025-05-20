@@ -21,7 +21,7 @@ from .modules.config.config import (
     DEFAULT_ENGINE,
     DEFAULT_PERIOD,
 )
-from .modules.interface import ( # IOrder,; ISale,; ILoss,
+from .modules.interface import ( # IOrder,; ISale,; ,
     IStart,
     IIncome,
     IExpend,
@@ -29,7 +29,8 @@ from .modules.interface import ( # IOrder,; ISale,; ILoss,
     ITransfer,
     IArrival,
     IHaving,
-    IOrder
+    IOrder,
+    ILostDemand
 )
 
 
@@ -74,7 +75,7 @@ class Datamart:
             "IArrival": None,  # Приёмка товаров
             "IOrder": None,  # Текущие размещённые заказы
             "ISale": None,  # Продажи (с ценой реализации)
-            "ILoss": None,  # Упущенный спрос
+            "ILostDemand": None,  # Упущенный спрос
         }
 
     # ##################################################
@@ -229,13 +230,13 @@ class Datamart:
     #     """
     #     return self.__get_interface(key="ISale", cls=ISale)
 
-    # @property
-    # def ILoss(self) -> object:
-    #     """
-    #     Создаёт и возвращает интерфейс для взаимодействия с данными
-    #     "Упущенный спрос".
-    #     """
-    #     return self.__get_interface(key="ILoss", cls=ILoss)
+    @property
+    def ILostDemand(self) -> object:
+        """
+        Создаёт и возвращает интерфейс для взаимодействия с данными
+        "Упущенный спрос".
+        """
+        return self.__get_interface(key="ILostDemand", cls=ILostDemand)
 
     # ##################################################
     # ЗАЩИЩЁННЫЕ МЕТОДЫ

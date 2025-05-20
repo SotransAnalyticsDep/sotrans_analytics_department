@@ -5,6 +5,8 @@
 # ##################################################
 # ИМПОРТЫ
 # ##################################################
+from typing import Any
+
 from ..sql import (
     SQLStart,
     SQLIncome,
@@ -13,13 +15,14 @@ from ..sql import (
     SQLTransfer,
     SQLArrival,
     SQLHaving,
-    SQLOrder
+    SQLOrder,
+    SQLLostDemand,
 )
 
 # ##################################################
 # API
 # ##################################################
-METHODS_MAP = {
+METHODS_MAP: dict[str, Any] = {
     "st": {"init": SQLStart.get_sql_query_init},
     "in": {
         "complect": SQLIncome.get_sql_query_complect,
@@ -62,6 +65,6 @@ METHODS_MAP = {
         "sale": None,
     },
     "ld": {
-        "lost_demand": None,
+        "lost_demand": SQLLostDemand.get_sql_query_lost_demand,
     },
 }
