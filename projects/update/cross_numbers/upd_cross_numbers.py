@@ -1,18 +1,19 @@
 """
-Модуль обновления данных кросс-номеров в базе данных PostgreSQL.
+Скрипт отвечает за импорт и вызов ETL-процесса обновления данных справочника кросс номеров в базе данных PostgreSQL.
 """
+
 # ##################################################
 # IMPORTS
 # ##################################################
-import sys
-
-sys.path.append(r'C:\Users\user\Desktop\github\new')
-from source.core.de.etl.update.cross_numbers.cross_numbers import ETLCrossNumbers
+from source.core.de.pipeline.update import ETLCrossNumbers
 
 
 # ##################################################
 # MAIN FUNCTION
 # ##################################################
 if __name__ == '__main__':
-    etl_cross_numbers = ETLCrossNumbers()
+    # Создание экземпляра класса ETL-процесса;
+    etl_cross_numbers: ETLCrossNumbers = ETLCrossNumbers()
+    
+    # Запуск ETL-процесса для обновления данных по кросс-номерам в базе данных;
     etl_cross_numbers.run()
