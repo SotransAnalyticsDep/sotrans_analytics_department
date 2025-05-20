@@ -5,7 +5,7 @@
 # ##################################################
 # ИМПОРТЫ
 # ##################################################
-from typing import Optional, Tuple
+from typing import Tuple
 
 from loguru import logger
 
@@ -30,7 +30,7 @@ class SQLOrder:
             prefix: str,
             doc_type: str,
             agg_cat_cols: Tuple[str]
-    ) -> Optional[str]:
+    ) -> str:
     
         # Формирование SQL-запроса
         query: str = build_sql_query_order(

@@ -36,7 +36,7 @@ class SQLIncome:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func == "first":
             # Формирование SQL-запроса
@@ -63,6 +63,8 @@ class SQLIncome:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")
 
 
     @staticmethod
@@ -74,7 +76,7 @@ class SQLIncome:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func == "first":
             # Формирование SQL-запроса
@@ -101,6 +103,8 @@ class SQLIncome:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")
 
 
     @staticmethod
@@ -112,7 +116,7 @@ class SQLIncome:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func == "first":
             # Формирование SQL-запроса
@@ -139,6 +143,8 @@ class SQLIncome:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")
 
 
     @staticmethod
@@ -150,7 +156,7 @@ class SQLIncome:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func == "first":
             # Формирование SQL-запроса
@@ -177,6 +183,8 @@ class SQLIncome:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")
 
 
     @staticmethod
@@ -188,7 +196,7 @@ class SQLIncome:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func == "first":
             # Формирование SQL-запроса
@@ -215,6 +223,8 @@ class SQLIncome:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")
 
 
     @staticmethod
@@ -226,7 +236,7 @@ class SQLIncome:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func == "first":
             # Формирование SQL-запроса
@@ -253,6 +263,8 @@ class SQLIncome:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")
 
 
     @staticmethod
@@ -264,7 +276,7 @@ class SQLIncome:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func == "first":
             # Формирование SQL-запроса
@@ -291,6 +303,8 @@ class SQLIncome:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")
 
 
     @staticmethod
@@ -302,7 +316,7 @@ class SQLIncome:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func == "first":
             # Формирование SQL-запроса
@@ -329,3 +343,5 @@ class SQLIncome:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")

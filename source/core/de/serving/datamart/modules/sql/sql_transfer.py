@@ -36,7 +36,7 @@ class SQLTransfer:
         agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
         agg_func: str,
-    ) -> Optional[str]:
+    ) -> str:
 
         if agg_func in ("first", "last"):
             # Формирование SQL-запроса
@@ -62,3 +62,5 @@ class SQLTransfer:
             )
             logger.success("SQL-запрос успешно сформирован")
             return query
+        else:
+            raise ValueError("Неизвестная функция агрегации")

@@ -33,7 +33,7 @@ class SQLHaving:
         agg_cat_cols: Tuple[str, ...],
         #agg_dgt_cols: Tuple[str, ...],
         agg_dt_cols: Tuple[str, ...],
-    ) -> Optional[str]:
+    ) -> str:
 
         # Формирование SQL-запроса
         query: str = build_sql_query_with_distinct(
