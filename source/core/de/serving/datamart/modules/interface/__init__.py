@@ -7,3 +7,4 @@ from .i_transfer import ITransfer
 from .i_arrival import IArrival
 from .i_having import IHaving
 from .i_order import IOrder
+from .i_loss import ILostDemand
