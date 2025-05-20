@@ -2,6 +2,8 @@ import pandas as pd
 import sqlalchemy as sa
 from loguru import logger
 
+from source.core.de.connectors import PGConnector
+
 class CheckExistsDataInTable:
     
     def batch_movement_by_date(self, prefix: str, doc_type: str, report_date: str) -> bool:
@@ -13,7 +15,7 @@ class CheckExistsDataInTable:
         """
         
         # Создание движка подключения
-        engine = sa.create_engine("postgresql+psycopg2://postgres:30691@localhost:5432/one_c")
+        engine = PGConnector().engine
         
         # SQL-запрос на проверку наличия данных за отчётную дату.
         sql_query: str = f"""
