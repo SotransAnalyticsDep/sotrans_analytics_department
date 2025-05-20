@@ -1,15 +1,16 @@
 """
-Модуль отвечает за создание подключения к базе данных PostgreSQL.
+Модуль отвечает за создание корректора к дазе данных PostgreSQL.
 """
 
 # ##################################################
 # IMPORTS
 # ##################################################
 from typing import Any
+from getpass import getuser
 
 from sqlalchemy import Engine, create_engine
-from loguru import logger
 from yaml import safe_load
+from loguru import logger
 
 
 # ##################################################
@@ -17,12 +18,12 @@ from yaml import safe_load
 # ##################################################
 class PGConnector:
     """
-    Класс отвечает за создание подключения к базе данных PostgreSQL.
+    Класс отвечает за создание корректора к дазе данных PostgreSQL.
     """
-
+    
     def __init__(
             self,
-            config_path: str = r'C:\Users\user\Desktop\github\sotrans_analytics_department\source\_configs\database.yaml',
+            username: str = getuser(),
             db_name: str = 'one_c',
             is_echo: bool = False
     ) -> None:
@@ -30,12 +31,13 @@ class PGConnector:
         Инициализация класса.
 
         Args:
-            config_path (str, optional): Путь к файлу конфигурации. По умолчанию: r'C:\\Users\\user\\Desktop\\github\\new\\source\\config\\database.yaml'.
-            db_name (str, optional): Название базы данных. По умолчанию: 'one_c'.
-            is_echo (bool, optional): Выводить ли логи запросов в консоль. По умолчанию: False.
+            username (str, optional): Имя пользователя ОС. По умолчанию берётся из имени текущего пользователя ОС getuser().
+            db_name (str, optional): Имя базы данных. По умолчанию 'one_c'.
+            is_echo (bool, optional): Выводить ли в консоль запросы к базе данных. По умолчанию False.
         """
-
-        self.__src_path: str = config_path
+        
+        self.__username: str = username
+        self.__src_path: str = rf'C:\Users\user\Desktop\github\sotrans_analytics_department\source\_configs\postgresql.yaml'
         self.__database_name: str = db_name
         self.__is_echo: bool = is_echo
         self._engine: Engine = self.__create_engine()
@@ -46,7 +48,7 @@ class PGConnector:
     # ##################################################
     def __create_connection_string(self) -> str:
         """
-        Метод формирует строку подключения к базе данных.
+        Метод формирует строку подключения к базе данных на основании имени пользователя ОС.
 
         Raises:
             ValueError: Непредвиденная ошибка при создании строки подключения к базе данных.
@@ -58,7 +60,7 @@ class PGConnector:
         try:
             logger.info('Начало формирования строки подключения к базе данных.')
             with open(file=self.__src_path, mode='r', encoding='utf-8') as file:
-                config: Any = safe_load(stream=file)['postgresql']
+                config: Any = safe_load(stream=file)[self.__username]
                 connection_string: str = (
                     f'{config['database']}+'
                     + f'{config['driver']}://'
