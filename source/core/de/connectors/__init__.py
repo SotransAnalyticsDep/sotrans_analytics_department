@@ -1,1 +1,1 @@
-from .postgresql import PGConnector
+from .postgresql import PGConnector # type: ignore
